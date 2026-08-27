@@ -1,0 +1,242 @@
+@model IEnumerable<SmartPlacement.Models.Application>
+
+@{
+    ViewData["Title"] = "My Applications";
+}
+
+<div class="dashboard">
+
+    <h1>📄 My Applications</h1>
+
+    <p>
+        Track the status of your job applications.
+    </p>
+
+
+    @if (Model != null && Model.Any())
+    {
+        <div class="applications-container">
+
+            @foreach (var application in Model)
+            {
+                <div class="application-card">
+
+                    <div class="application-header">
+
+                        <div>
+
+                            <h2>
+                                @application.JobTitle
+                            </h2>
+
+                            <p class="company-name">
+                                🏢 @application.CompanyName
+                            </p>
+
+                        </div>
+
+
+                        <span class="status
+                            @application.Status.ToLower()">
+
+                            @if (application.Status == "Applied")
+                            {
+                                <text>Applied</text>
+                            }
+                            else if (application.Status == "Shortlisted")
+                            {
+                                <text>✓ Shortlisted</text>
+                            }
+                            else if (application.Status == "Rejected")
+                            {
+                                <text>✕ Rejected</text>
+                            }
+                            else
+                            {
+                                @application.Status
+                            }
+
+                        </span>
+
+                    </div>
+
+
+                    <div class="application-info">
+
+                        <p>
+                            <strong>Applied Date:</strong>
+                            @application.AppliedDate
+                        </p>
+
+                        <p>
+                            <strong>Application ID:</strong>
+                            #@application.Id
+                        </p>
+
+                    </div>
+
+
+                    @if (application.Status == "Shortlisted")
+                    {
+                        <div class="success-box">
+                            🎉 Congratulations! You have been
+                            shortlisted for this position.
+                        </div>
+                    }
+                    else if (application.Status == "Rejected")
+                    {
+                        <div class="rejected-box">
+                            We appreciate your interest.
+                            Unfortunately, your application was not
+                            selected this time.
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="pending-box">
+                            ⏳ Your application is under review.
+                        </div>
+                    }
+
+                </div>
+            }
+
+        </div>
+    }
+    else
+    {
+        <div class="empty-message">
+
+            <div class="empty-icon">
+                📭
+            </div>
+
+            <h2>No Applications Yet</h2>
+
+            <p>
+                You have not applied for any jobs yet.
+            </p>
+
+            <br />
+
+            <a href="/Student/Jobs"
+               class="edit-profile-btn">
+                🔍 Find Jobs
+            </a>
+
+        </div>
+    }
+
+
+    <br />
+
+    <a href="/Student/Dashboard"
+       class="edit-profile-btn">
+        ← Back to Dashboard
+    </a>
+
+</div>
+
+
+<style>
+
+    .applications-container {
+        display: grid;
+        gap: 20px;
+        margin-top: 30px;
+    }
+
+    .application-card {
+        background: white;
+        padding: 25px;
+        border-radius: 16px;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+    }
+
+    .application-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 20px;
+    }
+
+    .application-header h2 {
+        margin: 0 0 8px;
+    }
+
+    .company-name {
+        margin: 0;
+    }
+
+    .status {
+        padding: 8px 14px;
+        border-radius: 20px;
+        font-weight: 600;
+        white-space: nowrap;
+    }
+
+    .status.applied {
+        background: #fff3cd;
+        color: #856404;
+    }
+
+    .status.shortlisted {
+        background: #d4edda;
+        color: #155724;
+    }
+
+    .status.rejected {
+        background: #f8d7da;
+        color: #721c24;
+    }
+
+    .application-info {
+        margin-top: 20px;
+        padding-top: 15px;
+        border-top: 1px solid #eee;
+    }
+
+    .application-info p {
+        margin: 8px 0;
+    }
+
+    .success-box {
+        margin-top: 20px;
+        padding: 14px;
+        border-radius: 10px;
+        background: #d4edda;
+        color: #155724;
+        font-weight: 600;
+    }
+
+    .rejected-box {
+        margin-top: 20px;
+        padding: 14px;
+        border-radius: 10px;
+        background: #f8d7da;
+        color: #721c24;
+    }
+
+    .pending-box {
+        margin-top: 20px;
+        padding: 14px;
+        border-radius: 10px;
+        background: #fff3cd;
+        color: #856404;
+    }
+
+    .empty-message {
+        background: white;
+        padding: 50px 30px;
+        margin-top: 30px;
+        border-radius: 16px;
+        text-align: center;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+    }
+
+    .empty-icon {
+        font-size: 45px;
+        margin-bottom: 10px;
+    }
+
+</style>

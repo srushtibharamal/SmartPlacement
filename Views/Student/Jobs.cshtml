@@ -1,0 +1,150 @@
+@model IEnumerable<SmartPlacement.Models.Job>
+
+@{
+    ViewData["Title"] = "Find Jobs";
+}
+
+<div class="jobs-page">
+
+    <div class="jobs-hero">
+
+        <span class="jobs-badge">
+            PLACEMENT PORTAL
+        </span>
+
+        <h1>Find Your Next Opportunity</h1>
+
+        <p>
+            Explore jobs and internships from leading companies
+            and take the next step in your career.
+        </p>
+
+    </div>
+
+
+    <div class="jobs-filter">
+
+        <div class="job-search-box">
+            🔍
+            <input type="text"
+                   placeholder="Search job title or company..." />
+        </div>
+
+        <select>
+            <option>All Locations</option>
+            <option>Pune</option>
+            <option>Bengaluru</option>
+            <option>Hyderabad</option>
+        </select>
+
+        <select>
+            <option>All Job Types</option>
+            <option>Full Time</option>
+            <option>Part Time</option>
+            <option>Internship</option>
+        </select>
+
+    </div>
+
+
+    <div class="job-container">
+
+        @if (Model != null && Model.Any())
+        {
+            @foreach (var job in Model)
+            {
+                <div class="job-card">
+
+                    <div class="job-card-top">
+
+                        <div class="company-icon">
+                            @(string.IsNullOrEmpty(job.CompanyName)
+                                ? "C"
+                                : job.CompanyName.Substring(0, 1).ToUpper())
+                        </div>
+
+                        <span class="job-type">
+                            @job.JobType
+                        </span>
+
+                        <span class="job-status">
+                            ● Open
+                        </span>
+
+                    </div>
+
+                    <h2>
+                        @job.JobTitle
+                    </h2>
+
+                    <p class="company-name">
+                        @job.CompanyName
+                    </p>
+
+                    <div class="job-info">
+
+                        <span>
+                            📍 @job.Location
+                        </span>
+
+                        <span>
+                            💰 @job.Salary
+                        </span>
+
+                    </div>
+
+                    <p class="job-description">
+                        @job.Description
+                    </p>
+
+                    <div class="job-buttons">
+
+                        <a href="/Student/JobDetails?jobId=@job.Id"
+                           class="details-btn">
+                            View Job Details →
+                        </a>
+
+                        <a href="/Student/Apply?jobId=@job.Id"
+                           class="apply-btn">
+                            Apply Now →
+                        </a>
+
+                    </div>
+
+                </div>
+            }
+        }
+        else
+        {
+            <div class="empty-jobs">
+
+                <h2>📭 No Jobs Available</h2>
+
+                <p>
+                    No companies have posted jobs yet.
+                    Please check again later.
+                </p>
+
+            </div>
+        }
+
+    </div>
+
+</div>
+
+<style>
+
+    .empty-jobs {
+        width: 100%;
+        padding: 50px 20px;
+        text-align: center;
+        background: white;
+        border-radius: 15px;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+    }
+
+    .empty-jobs h2 {
+        margin-bottom: 10px;
+    }
+
+</style>

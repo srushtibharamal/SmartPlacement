@@ -1,0 +1,95 @@
+@{
+    ViewData["Title"] = "Company Registration";
+}
+
+<div class="login-page">
+
+    <div class="login-card">
+
+        <div class="login-icon">🏢</div>
+
+        <h1>Create Company Account</h1>
+
+        <p class="login-subtitle">
+            Register your company on SmartPlacement
+        </p>
+
+        @if (ViewBag.Error != null)
+        {
+            <p class="error-message">
+                @ViewBag.Error
+            </p>
+        }
+
+        <form method="post"
+              action="/Company/Register">
+
+            <div class="login-input-group">
+                <label>Company Name</label>
+
+                <input type="text"
+                       name="companyName"
+                       placeholder="Enter company name"
+                       required />
+            </div>
+
+            <div class="login-input-group">
+                <label>Email</label>
+
+                <input type="email"
+                       name="email"
+                       placeholder="Enter company email"
+                       required />
+            </div>
+
+            <div class="login-input-group">
+                <label>Phone Number</label>
+
+                <input type="tel"
+                       name="phone"
+                       placeholder="Enter 10-digit phone number"
+                       maxlength="10"
+                       required />
+            </div>
+
+            <div class="login-input-group">
+                <label>Location</label>
+
+                <input type="text"
+                       name="location"
+                       placeholder="Enter company location"
+                       required />
+            </div>
+
+            <div class="login-input-group">
+                <label>Password</label>
+
+                <input type="password"
+                       name="password"
+                       placeholder="Create a password"
+                       required />
+            </div>
+
+            <button type="submit"
+                    class="login-btn">
+                Create Company Account
+            </button>
+
+        </form>
+
+        <p class="register-text">
+            Already have a company account?
+            <a href="/Company/Login">
+                Login
+            </a>
+        </p>
+
+        <p class="register-text">
+            <a href="/">
+                ← Back to Home
+            </a>
+        </p>
+
+    </div>
+
+</div>

@@ -1,0 +1,189 @@
+@{
+    ViewData["Title"] = "Placement Officer Login";
+}
+
+<div class="login-page">
+
+    <div class="login-card">
+
+        <div class="login-icon">
+            🏫
+        </div>
+
+        <h1>Placement Officer Login</h1>
+
+        <p class="login-subtitle">
+            Login to manage the placement activities.
+        </p>
+
+        @if (ViewBag.Error != null)
+        {
+            <div class="error-message">
+                @ViewBag.Error
+            </div>
+        }
+
+        <form method="post"
+              action="/PlacementOfficer/Login">
+
+            <div class="form-group">
+
+                <label>Email</label>
+
+                <input type="email"
+                       name="email"
+                       placeholder="Enter officer email"
+                       required />
+
+            </div>
+
+            <div class="form-group">
+
+                <label>Password</label>
+
+                <input type="password"
+                       name="password"
+                       placeholder="Enter password"
+                       required />
+
+            </div>
+
+            <button type="submit"
+                    class="login-btn">
+                Login →
+            </button>
+
+        </form>
+
+        <div class="login-info">
+
+            <p>
+                <strong>Demo Login</strong>
+            </p>
+
+            <p>
+                Email: officer@smartplacement.com
+            </p>
+
+            <p>
+                Password: admin123
+            </p>
+
+        </div>
+
+        <a href="/" class="back-link">
+            ← Back to Home
+        </a>
+
+    </div>
+
+</div>
+
+
+<style>
+
+    .login-page {
+        min-height: 75vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 40px 20px;
+        background: #f5f8fc;
+    }
+
+    .login-card {
+        width: 100%;
+        max-width: 480px;
+        background: white;
+        padding: 45px;
+        border-radius: 20px;
+        box-shadow: 0 10px 35px rgba(0,0,0,0.10);
+        text-align: center;
+    }
+
+    .login-icon {
+        font-size: 55px;
+        margin-bottom: 15px;
+    }
+
+    .login-card h1 {
+        margin-bottom: 10px;
+        color: #172033;
+    }
+
+    .login-subtitle {
+        color: #667085;
+        margin-bottom: 30px;
+    }
+
+    .form-group {
+        text-align: left;
+        margin-bottom: 20px;
+    }
+
+    .form-group label {
+        display: block;
+        font-weight: 600;
+        margin-bottom: 8px;
+    }
+
+    .form-group input {
+        width: 100%;
+        box-sizing: border-box;
+        padding: 14px;
+        border: 1px solid #d0d5dd;
+        border-radius: 10px;
+        font-size: 16px;
+    }
+
+    .form-group input:focus {
+        outline: none;
+        border-color: #2878f0;
+    }
+
+    .login-btn {
+        width: 100%;
+        padding: 15px;
+        border: none;
+        border-radius: 10px;
+        background: #2878f0;
+        color: white;
+        font-size: 17px;
+        font-weight: 600;
+        cursor: pointer;
+    }
+
+    .login-btn:hover {
+        background: #1769d3;
+    }
+
+    .error-message {
+        background: #fde8e8;
+        color: #b42318;
+        padding: 12px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+    }
+
+    .login-info {
+        margin-top: 25px;
+        padding: 15px;
+        background: #f2f4f7;
+        border-radius: 10px;
+        font-size: 14px;
+        color: #475467;
+    }
+
+    .login-info p {
+        margin: 5px;
+    }
+
+    .back-link {
+        display: inline-block;
+        margin-top: 25px;
+        color: #2878f0;
+        text-decoration: none;
+        font-weight: 600;
+    }
+
+</style>

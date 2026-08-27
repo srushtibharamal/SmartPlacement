@@ -1,0 +1,300 @@
+@model IEnumerable<SmartPlacement.Models.Job>
+
+@{
+    ViewData["Title"] = "Jobs";
+}
+
+<div class="jobs-page">
+
+    <div class="jobs-header">
+        <div>
+            <span class="jobs-badge">PLACEMENT PORTAL</span>
+
+            <h1>Manage Jobs</h1>
+
+            <p>
+                View and manage all job opportunities posted for students.
+            </p>
+        </div>
+
+        <div class="jobs-header-icon">
+            💼
+        </div>
+    </div>
+
+
+    <!-- Search & Filter -->
+
+    <div class="job-search-box">
+
+        <div class="search-field">
+            <span>🔍</span>
+
+            <input type="text"
+                   id="jobSearch"
+                   placeholder="Search job title or company..."
+                   onkeyup="filterJobs()" />
+        </div>
+
+
+        <select id="locationFilter"
+                onchange="filterJobs()">
+
+            <option value="">All Locations</option>
+
+            <option value="Pune">Pune</option>
+            <option value="Bengaluru">Bengaluru</option>
+            <option value="Hyderabad">Hyderabad</option>
+            <option value="Mumbai">Mumbai</option>
+            <option value="Chennai">Chennai</option>
+
+        </select>
+
+
+        <select id="typeFilter"
+                onchange="filterJobs()">
+
+            <option value="">All Job Types</option>
+
+            <option value="Full Time">Full Time</option>
+            <option value="Internship">Internship</option>
+
+        </select>
+
+    </div>
+
+
+    <!-- Result Heading -->
+
+    <div class="jobs-result">
+
+        <h2>Available Opportunities</h2>
+
+        <span id="jobCount">
+            @Model.Count() opportunities
+        </span>
+
+    </div>
+
+
+    <!-- Jobs -->
+
+    <div class="job-container"
+         id="jobContainer">
+
+        @if (Model != null && Model.Any())
+        {
+            foreach (var job in Model)
+            {
+                <div class="job-card"
+                     data-title="@job.JobTitle"
+                     data-company="@job.CompanyName"
+                     data-location="@job.Location"
+                     data-type="@job.JobType">
+
+                    <div class="company-icon">
+                        @job.CompanyName.Substring(0, 1).ToUpper()
+                    </div>
+
+
+                    <div class="job-content">
+
+                        <div class="job-top">
+
+                            <span class="job-type">
+                                @job.JobType
+                            </span>
+
+                            <span class="job-status">
+                                ● Open
+                            </span>
+
+                        </div>
+
+
+                        <h2>
+                            @job.JobTitle
+                        </h2>
+
+
+                        <p class="company-name">
+                            @job.CompanyName
+                        </p>
+
+
+                        <div class="job-info">
+
+                            <span>
+                                📍 @job.Location
+                            </span>
+
+                            <span>
+                                💰 @job.Salary
+                            </span>
+
+                        </div>
+
+
+                        <p class="job-description">
+                            @job.Description
+                        </p>
+
+
+                        @if (!string.IsNullOrWhiteSpace(job.SkillsRequired))
+                        {
+                            <p class="job-skills">
+                                <strong>Skills:</strong>
+                                @job.SkillsRequired
+                            </p>
+                        }
+
+
+                        <div class="job-footer">
+
+                            <span class="posted-date">
+                                📅 @job.PostedDate
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+            }
+        }
+        else
+        {
+            <div class="empty-box">
+
+                <div class="empty-icon">
+                    📭
+                </div>
+
+                <h2>No Jobs Found</h2>
+
+                <p>
+                    No jobs have been posted yet.
+                </p>
+
+            </div>
+        }
+
+    </div>
+
+
+    <!-- No Search Results -->
+
+    <div id="noJobs"
+         class="no-jobs"
+         style="display:none;">
+
+        <div>🔎</div>
+
+        <h3>
+            No opportunities found
+        </h3>
+
+        <p>
+            Try changing your search or filter.
+        </p>
+
+    </div>
+
+</div>
+
+
+<script>
+
+    function filterJobs() {
+
+        const search =
+            document.getElementById("jobSearch")
+                .value
+                .toLowerCase();
+
+        const location =
+            document.getElementById("locationFilter")
+                .value;
+
+        const type =
+            document.getElementById("typeFilter")
+                .value;
+
+        const jobs =
+            document.querySelectorAll(".job-card");
+
+        let visibleJobs = 0;
+
+
+        jobs.forEach(function (job) {
+
+            const title =
+                job.dataset.title.toLowerCase();
+
+            const company =
+                job.dataset.company.toLowerCase();
+
+            const jobLocation =
+                job.dataset.location;
+
+            const jobType =
+                job.dataset.type;
+
+
+            const matchesSearch =
+                title.includes(search) ||
+                company.includes(search);
+
+
+            const matchesLocation =
+                location === "" ||
+                jobLocation === location;
+
+
+            const matchesType =
+                type === "" ||
+                jobType === type;
+
+
+            if (
+                matchesSearch &&
+                matchesLocation &&
+                matchesType
+            ) {
+
+                job.style.display = "flex";
+
+                visibleJobs++;
+
+            }
+            else {
+
+                job.style.display = "none";
+
+            }
+
+        });
+
+
+        document.getElementById("jobCount").innerText =
+            visibleJobs + " opportunities";
+
+
+        const noJobs =
+            document.getElementById("noJobs");
+
+
+        if (visibleJobs === 0) {
+
+            noJobs.style.display = "block";
+
+        }
+        else {
+
+            noJobs.style.display = "none";
+
+        }
+
+    }
+
+</script>
