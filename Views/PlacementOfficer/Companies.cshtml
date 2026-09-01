@@ -1,0 +1,226 @@
+@model IEnumerable<SmartPlacement.Models.Company>
+
+@{
+    ViewData["Title"] = "Companies";
+}
+
+<div class="companies-page">
+
+    <div class="companies-header">
+        <div class="header-icon">🏢</div>
+
+        <h1>Registered Companies</h1>
+
+        <p>
+            View all companies participating in the placement process.
+        </p>
+    </div>
+
+
+    @if (Model != null && Model.Any())
+    {
+        <div class="companies-grid">
+
+            @foreach (var company in Model)
+            {
+                <div class="company-card">
+
+                    <div class="company-icon">
+                        🏢
+                    </div>
+
+                    <div class="company-details">
+
+                        <h2>
+                            @company.CompanyName
+                        </h2>
+
+                        <p>
+                            📧 <strong>Email:</strong>
+                            @company.Email
+                        </p>
+
+                    </div>
+
+                </div>
+            }
+
+        </div>
+    }
+    else
+    {
+        <div class="empty-box">
+
+            <div class="empty-icon">🏢</div>
+
+            <h2>No Companies Found</h2>
+
+            <p>
+                No companies are currently registered.
+            </p>
+
+        </div>
+    }
+
+
+    <div class="back-section">
+
+        <a href="/PlacementOfficer/Dashboard"
+           class="back-btn">
+            ← Back to Dashboard
+        </a>
+
+    </div>
+
+</div>
+
+
+<style>
+
+    .companies-page {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 45px 25px 70px;
+    }
+
+
+    .companies-header {
+        background: linear-gradient(135deg, #172554, #2563eb);
+        color: white;
+        padding: 45px 30px;
+        border-radius: 22px;
+        text-align: center;
+        margin-bottom: 35px;
+    }
+
+
+    .header-icon {
+        font-size: 55px;
+        margin-bottom: 10px;
+    }
+
+
+    .companies-header h1 {
+        font-size: 36px;
+        margin: 5px 0 10px;
+    }
+
+
+    .companies-header p {
+        font-size: 17px;
+        opacity: 0.9;
+        margin: 0;
+    }
+
+
+    .companies-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 22px;
+    }
+
+
+    .company-card {
+        background: white;
+        border-radius: 18px;
+        padding: 28px;
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        box-shadow: 0 7px 25px rgba(0,0,0,0.08);
+        border: 1px solid #e5e7eb;
+    }
+
+
+    .company-icon {
+        width: 65px;
+        height: 65px;
+        background: #eff6ff;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 32px;
+        flex-shrink: 0;
+    }
+
+
+    .company-details h2 {
+        margin: 0 0 12px;
+        color: #172554;
+        font-size: 23px;
+    }
+
+
+    .company-details p {
+        margin: 0;
+        color: #64748b;
+        font-size: 15px;
+    }
+
+
+    .empty-box {
+        background: white;
+        padding: 60px 20px;
+        text-align: center;
+        border-radius: 20px;
+        box-shadow: 0 7px 25px rgba(0,0,0,0.08);
+    }
+
+
+    .empty-icon {
+        font-size: 60px;
+        margin-bottom: 15px;
+    }
+
+
+    .empty-box h2 {
+        color: #172554;
+        margin-bottom: 8px;
+    }
+
+
+    .empty-box p {
+        color: #64748b;
+    }
+
+
+    .back-section {
+        text-align: center;
+        margin-top: 30px;
+    }
+
+
+    .back-btn {
+        display: inline-block;
+        padding: 12px 24px;
+        background: #2563eb;
+        color: white;
+        text-decoration: none;
+        border-radius: 10px;
+        font-weight: 600;
+    }
+
+
+    .back-btn:hover {
+        background: #1d4ed8;
+    }
+
+
+    @@media (max-width: 700px) {
+
+        .companies-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .companies-header h1 {
+            font-size: 30px;
+        }
+
+        .company-card {
+            padding: 22px;
+        }
+
+    }
+
+</style>

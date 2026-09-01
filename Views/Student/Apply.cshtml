@@ -1,0 +1,216 @@
+@{
+    ViewData["Title"] = "Apply for Job";
+
+    int jobId = ViewBag.JobId ?? 1;
+    string jobTitle = ViewBag.JobTitle ?? "Software Developer";
+    string companyName = ViewBag.CompanyName ?? "TCS";
+}
+
+<div class="apply-page">
+
+    <div class="apply-card">
+
+        <div class="apply-header">
+
+            <span class="apply-badge">
+                JOB APPLICATION
+            </span>
+
+            <h1>Apply for this Job</h1>
+
+            <p>
+                Submit your details and resume to apply for this opportunity.
+            </p>
+
+        </div>
+
+
+        <!-- Selected Job -->
+
+        <div class="selected-job"
+             style="margin: 30px 0 !important; padding: 20px !important;">
+
+            <div class="selected-company-icon">
+                @companyName.Substring(0, 1)
+            </div>
+
+            <div>
+
+                <h2 style="margin: 0 0 8px 0 !important;">
+                    @jobTitle
+                </h2>
+
+                <p style="margin: 0 !important;">
+                    @companyName
+                </p>
+
+            </div>
+
+        </div>
+
+
+        @if (TempData["SuccessMessage"] != null)
+        {
+            <div class="success-message">
+                @TempData["SuccessMessage"]
+            </div>
+        }
+
+
+        @if (ViewBag.Error != null)
+        {
+            <div class="error-message">
+                @ViewBag.Error
+            </div>
+        }
+
+
+        <!-- Application Form -->
+
+        <form method="post"
+              action="/Student/Apply"
+              enctype="multipart/form-data">
+
+            <input type="hidden"
+                   name="jobId"
+                   value="@jobId" />
+
+
+            <!-- Full Name -->
+
+            <div style="margin-bottom: 25px !important;">
+
+                <label for="fullName"
+                       style="display: block !important;
+                              margin-bottom: 10px !important;
+                              font-weight: 600 !important;">
+                    Full Name
+                </label>
+
+                <input type="text"
+                       id="fullName"
+                       name="fullName"
+                       placeholder="Enter your full name"
+                       required
+                       style="display: block !important;
+                              width: 100% !important;
+                              box-sizing: border-box !important;
+                              padding: 14px !important;
+                              border: 1px solid #ccc !important;
+                              border-radius: 8px !important;
+                              font-size: 16px !important;" />
+
+            </div>
+
+
+            <!-- Email -->
+
+            <div style="margin-bottom: 25px !important;">
+
+                <label for="email"
+                       style="display: block !important;
+                              margin-bottom: 10px !important;
+                              font-weight: 600 !important;">
+                    Email
+                </label>
+
+                <input type="email"
+                       id="email"
+                       name="email"
+                       placeholder="Enter your email"
+                       required
+                       style="display: block !important;
+                              width: 100% !important;
+                              box-sizing: border-box !important;
+                              padding: 14px !important;
+                              border: 1px solid #ccc !important;
+                              border-radius: 8px !important;
+                              font-size: 16px !important;" />
+
+            </div>
+
+
+            <!-- Phone Number -->
+
+            <div style="margin-bottom: 25px !important;">
+
+                <label for="phone"
+                       style="display: block !important;
+                              margin-bottom: 10px !important;
+                              font-weight: 600 !important;">
+                    Phone Number
+                </label>
+
+                <input type="text"
+                       id="phone"
+                       name="phone"
+                       placeholder="Enter 10-digit phone number"
+                       maxlength="10"
+                       required
+                       style="display: block !important;
+                              width: 100% !important;
+                              box-sizing: border-box !important;
+                              padding: 14px !important;
+                              border: 1px solid #ccc !important;
+                              border-radius: 8px !important;
+                              font-size: 16px !important;" />
+
+            </div>
+
+
+            <!-- Resume Upload -->
+
+            <div style="margin-bottom: 30px !important;">
+
+                <label for="resume"
+                       style="display: block !important;
+                              margin-bottom: 10px !important;
+                              font-weight: 600 !important;">
+                    Resume
+                </label>
+
+                <input type="file"
+                       id="resume"
+                       name="resume"
+                       accept=".pdf,.doc,.docx"
+                       required
+                       style="display: block !important;
+                              width: 100% !important;
+                              box-sizing: border-box !important;
+                              padding: 12px !important;
+                              border: 1px solid #ccc !important;
+                              border-radius: 8px !important;
+                              font-size: 16px !important;
+                              background: white !important;" />
+
+                <small style="display: block !important;
+                              margin-top: 8px !important;
+                              color: #666 !important;">
+                    Upload your resume in PDF, DOC, or DOCX format.
+                </small>
+
+            </div>
+
+
+            <!-- Buttons -->
+
+            <div class="form-actions"
+                 style="margin-top: 30px !important;">
+
+                <a href="/Student/Jobs"
+                   class="back-btn">
+                    ← Back to Jobs
+                </a>
+
+                <button type="submit"
+                        class="submit-application-btn">
+                    Submit Application →
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>

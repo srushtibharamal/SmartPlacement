@@ -1,0 +1,96 @@
+@{
+    ViewData["Title"] = "Post a New Job";
+}
+
+<div class="login-page">
+
+    <div class="login-card">
+
+        <div class="login-icon">📢</div>
+
+        <h1>Post a New Job</h1>
+
+        <p class="login-subtitle">
+            Create a job opportunity for students.
+        </p>
+
+        @if (ViewBag.Error != null)
+        {
+            <p class="error-message">
+                @ViewBag.Error
+            </p>
+        }
+
+        <form method="post" action="/Company/PostJob">
+
+            <div class="login-input-group">
+                <label>Job Title</label>
+
+                <input type="text"
+                       name="jobTitle"
+                       placeholder="e.g. Software Developer"
+                       required />
+            </div>
+
+            <div class="login-input-group">
+                <label>Location</label>
+
+                <input type="text"
+                       name="location"
+                       placeholder="e.g. Pune"
+                       required />
+            </div>
+
+            <div class="login-input-group">
+                <label>Job Type</label>
+
+                <select name="jobType" required>
+                    <option value="">Select Job Type</option>
+                    <option value="Full Time">Full Time</option>
+                    <option value="Part Time">Part Time</option>
+                    <option value="Internship">Internship</option>
+                </select>
+            </div>
+
+            <div class="login-input-group">
+                <label>Salary</label>
+
+                <input type="text"
+                       name="salary"
+                       placeholder="e.g. ₹6 LPA"
+                       required />
+            </div>
+
+            <div class="login-input-group">
+                <label>Skills Required</label>
+
+                <input type="text"
+                       name="skillsRequired"
+                       placeholder="e.g. C#, SQL, ASP.NET"
+                       required />
+            </div>
+
+            <div class="login-input-group">
+                <label>Job Description</label>
+
+                <textarea name="description"
+                          rows="5"
+                          placeholder="Enter job description"
+                          required></textarea>
+            </div>
+
+            <button type="submit" class="login-btn">
+                Post Job →
+            </button>
+
+        </form>
+
+        <p class="register-text">
+            <a href="/Company/Dashboard">
+                ← Back to Company Dashboard
+            </a>
+        </p>
+
+    </div>
+
+</div>

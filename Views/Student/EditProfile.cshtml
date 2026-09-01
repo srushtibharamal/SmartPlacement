@@ -1,0 +1,320 @@
+@model SmartPlacement.Models.Student
+
+@{
+    ViewData["Title"] = "Edit Profile";
+}
+
+<div class="profile-page">
+
+    <div class="profile-card">
+
+        <div class="profile-icon">✏️</div>
+
+        <h1>Edit Profile</h1>
+
+        <p class="profile-subtitle">
+            Update your student information and resume.
+        </p>
+
+
+        @if (TempData["ProfileMessage"] != null)
+        {
+            <div class="success-message">
+                ✓ @TempData["ProfileMessage"]
+            </div>
+        }
+
+
+        @if (ViewBag.Error != null)
+        {
+            <div class="error-message">
+                ⚠️ @ViewBag.Error
+            </div>
+        }
+
+
+        <form method="post"
+              action="/Student/EditProfile"
+              enctype="multipart/form-data">
+
+            <!-- FULL NAME -->
+
+            <div class="profile-field">
+
+                <label>Full Name</label>
+
+                <input type="text"
+                       name="fullName"
+                       value="@Model?.FullName"
+                       placeholder="Enter your full name"
+                       required />
+
+            </div>
+
+
+            <!-- EMAIL -->
+
+            <div class="profile-field">
+
+                <label>Email</label>
+
+                <input type="email"
+                       name="email"
+                       value="@Model?.Email"
+                       placeholder="Enter your email"
+                       required />
+
+            </div>
+
+
+            <!-- PHONE -->
+
+            <div class="profile-field">
+
+                <label>Phone Number</label>
+
+                <input type="tel"
+                       name="phone"
+                       value="@Model?.Phone"
+                       placeholder="Enter your 10-digit phone number"
+                       maxlength="10"
+                       required />
+
+            </div>
+
+
+            <!-- COURSE -->
+
+            <div class="profile-field">
+
+                <label>Course</label>
+
+                <input type="text"
+                       name="course"
+                       value="@Model?.Course"
+                       placeholder="Enter your course"
+                       required />
+
+            </div>
+
+
+            <!-- COLLEGE -->
+
+            <div class="profile-field">
+
+                <label>College</label>
+
+                <input type="text"
+                       name="college"
+                       value="@Model?.College"
+                       placeholder="Enter your college"
+                       required />
+
+            </div>
+
+
+            <!-- RESUME -->
+
+            <div class="profile-field">
+
+                <label>Resume</label>
+
+                <div class="resume-upload">
+
+                    <input type="file"
+                           name="resume"
+                           accept=".pdf,.doc,.docx" />
+
+                    <p>
+                        Accepted formats: PDF, DOC, DOCX
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- CURRENT RESUME -->
+
+            @if (!string.IsNullOrWhiteSpace(Model?.ResumeFileName)
+                && Model.ResumeFileName != "Not Uploaded")
+            {
+                <div class="current-resume">
+
+                    <span class="resume-icon">📄</span>
+
+                    <div>
+                        <strong>Current Resume</strong>
+
+                        <p>
+                            @Model.ResumeFileName
+                        </p>
+                    </div>
+
+                </div>
+            }
+
+
+            <button type="submit"
+                    class="save-profile-btn">
+
+                💾 Save Profile
+
+            </button>
+
+        </form>
+
+    </div>
+
+
+    <a href="/Student/Dashboard"
+       class="back-btn">
+
+        ← Back to Dashboard
+
+    </a>
+
+</div>
+
+
+<style>
+
+    .profile-page {
+        max-width: 700px;
+        margin: 40px auto;
+        padding: 20px;
+    }
+
+    .profile-card {
+        background: white;
+        padding: 35px;
+        border-radius: 18px;
+        box-shadow: 0 5px 25px rgba(0,0,0,0.08);
+    }
+
+    .profile-icon {
+        text-align: center;
+        font-size: 50px;
+        margin-bottom: 10px;
+    }
+
+    .profile-card h1 {
+        text-align: center;
+        margin: 0 0 8px;
+        font-size: 34px;
+    }
+
+    .profile-subtitle {
+        text-align: center;
+        color: #666;
+        margin-bottom: 30px;
+    }
+
+    .success-message {
+        background: #d4edda;
+        color: #155724;
+        padding: 13px 16px;
+        border-radius: 9px;
+        margin-bottom: 25px;
+        font-weight: 600;
+    }
+
+    .error-message {
+        background: #f8d7da;
+        color: #721c24;
+        padding: 13px 16px;
+        border-radius: 9px;
+        margin-bottom: 25px;
+        font-weight: 600;
+    }
+
+    .profile-field {
+        margin-bottom: 20px;
+    }
+
+    .profile-field label {
+        display: block;
+        margin-bottom: 7px;
+        font-weight: 600;
+    }
+
+    .profile-field input[type="text"],
+    .profile-field input[type="email"],
+    .profile-field input[type="tel"] {
+        width: 100%;
+        box-sizing: border-box;
+        padding: 12px 14px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        font-size: 15px;
+    }
+
+    .profile-field input:focus {
+        outline: none;
+        border-color: #0d6efd;
+    }
+
+    .resume-upload {
+        border: 2px dashed #d6dce5;
+        border-radius: 10px;
+        padding: 18px;
+        background: #fafbfc;
+    }
+
+    .resume-upload input[type="file"] {
+        width: 100%;
+        font-size: 15px;
+    }
+
+    .resume-upload p {
+        margin: 10px 0 0;
+        color: #777;
+        font-size: 13px;
+    }
+
+    .current-resume {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 14px;
+        margin-bottom: 20px;
+        background: #f0f7ff;
+        border-radius: 10px;
+    }
+
+    .resume-icon {
+        font-size: 28px;
+    }
+
+    .current-resume p {
+        margin: 4px 0 0;
+        color: #666;
+        font-size: 13px;
+        word-break: break-all;
+    }
+
+    .save-profile-btn {
+        width: 100%;
+        border: none;
+        padding: 13px;
+        border-radius: 9px;
+        background: #0d6efd;
+        color: white;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+    }
+
+    .save-profile-btn:hover {
+        opacity: 0.9;
+    }
+
+    .back-btn {
+        display: inline-block;
+        margin-top: 25px;
+        color: #0d6efd;
+        text-decoration: none;
+        font-weight: 600;
+    }
+
+</style>

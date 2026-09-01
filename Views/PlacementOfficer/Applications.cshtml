@@ -1,0 +1,384 @@
+@model IEnumerable<SmartPlacement.Models.Application>
+
+@{
+    ViewData["Title"] = "Applications";
+}
+
+<div class="applications-page">
+
+    <div class="applications-header">
+
+        <div>
+            <span class="applications-badge">
+                PLACEMENT PORTAL
+            </span>
+
+            <h1>Student Applications</h1>
+
+            <p>
+                View and monitor applications submitted by students.
+            </p>
+        </div>
+
+        <div class="applications-icon">
+            📄
+        </div>
+
+    </div>
+
+
+    <!-- Summary -->
+
+    <div class="summary-card">
+
+        <div class="summary-icon">
+            📋
+        </div>
+
+        <div>
+            <h2>@Model.Count()</h2>
+            <p>Total Applications</p>
+        </div>
+
+    </div>
+
+
+    <!-- Applications -->
+
+    <div class="applications-container">
+
+        @if (Model != null && Model.Any())
+        {
+            foreach (var application in Model)
+            {
+                <div class="application-card">
+
+                    <div class="application-icon">
+                        👤
+                    </div>
+
+
+                    <div class="application-content">
+
+                        <div class="application-top">
+
+                            <h2>
+                                @application.StudentName
+                            </h2>
+
+                            @if (application.Status == "Shortlisted")
+                            {
+                                <span class="status shortlisted">
+                                    ⭐ Shortlisted
+                                </span>
+                            }
+                            else if (application.Status == "Rejected")
+                            {
+                                <span class="status rejected">
+                                    ❌ Rejected
+                                </span>
+                            }
+                            else
+                            {
+                                <span class="status applied">
+                                    🟢 @application.Status
+                                </span>
+                            }
+
+                        </div>
+
+
+                        <div class="application-details">
+
+                            <p>
+                                <strong>💼 Job:</strong>
+                                @application.JobTitle
+                            </p>
+
+                            <p>
+                                <strong>🏢 Company:</strong>
+                                @application.CompanyName
+                            </p>
+
+                            <p>
+                                <strong>📅 Applied Date:</strong>
+                                @application.AppliedDate
+                            </p>
+
+                        </div>
+
+
+                        <div class="application-footer">
+
+                            <span>
+                                Application ID:
+                                #@application.Id
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+            }
+        }
+        else
+        {
+            <div class="empty-box">
+
+                <div class="empty-icon">
+                    📭
+                </div>
+
+                <h2>No Applications Found</h2>
+
+                <p>
+                    No student applications have been submitted yet.
+                </p>
+
+            </div>
+        }
+
+    </div>
+
+</div>
+
+
+<style>
+
+    .applications-page {
+        max-width: 1100px;
+        margin: 40px auto;
+        padding: 20px;
+        font-family: Arial, sans-serif;
+    }
+
+
+    .applications-header {
+        background: linear-gradient(135deg, #172554, #2563eb);
+        color: white;
+        border-radius: 28px;
+        padding: 50px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 30px;
+    }
+
+
+    .applications-badge {
+        font-size: 14px;
+        font-weight: bold;
+        letter-spacing: 2px;
+        opacity: 0.9;
+    }
+
+
+    .applications-header h1 {
+        font-size: 42px;
+        margin: 15px 0 10px;
+    }
+
+
+    .applications-header p {
+        font-size: 18px;
+        margin: 0;
+        opacity: 0.9;
+    }
+
+
+    .applications-icon {
+        font-size: 70px;
+    }
+
+
+    .summary-card {
+        background: white;
+        border-radius: 22px;
+        padding: 25px 30px;
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        margin-bottom: 30px;
+        box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+    }
+
+
+    .summary-icon {
+        font-size: 45px;
+    }
+
+
+    .summary-card h2 {
+        margin: 0;
+        font-size: 32px;
+    }
+
+
+    .summary-card p {
+        margin: 5px 0 0;
+        color: #64748b;
+        font-size: 16px;
+    }
+
+
+    .applications-container {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+
+    .application-card {
+        background: white;
+        border-radius: 22px;
+        padding: 25px;
+        display: flex;
+        gap: 25px;
+        box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+    }
+
+
+    .application-icon {
+        width: 70px;
+        height: 70px;
+        border-radius: 18px;
+        background: #eff6ff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 35px;
+        flex-shrink: 0;
+    }
+
+
+    .application-content {
+        flex: 1;
+    }
+
+
+    .application-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 15px;
+        margin-bottom: 15px;
+    }
+
+
+    .application-top h2 {
+        margin: 0;
+        font-size: 24px;
+    }
+
+
+    .status {
+        padding: 9px 16px;
+        border-radius: 20px;
+        font-weight: bold;
+        font-size: 14px;
+        white-space: nowrap;
+    }
+
+
+    .status.applied {
+        background: #dbeafe;
+        color: #1d4ed8;
+    }
+
+
+    .status.shortlisted {
+        background: #dcfce7;
+        color: #166534;
+    }
+
+
+    .status.rejected {
+        background: #fee2e2;
+        color: #b91c1c;
+    }
+
+
+    .application-details {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 15px;
+    }
+
+
+    .application-details p {
+        margin: 0;
+        color: #475569;
+        line-height: 1.5;
+    }
+
+
+    .application-details strong {
+        color: #1e293b;
+    }
+
+
+    .application-footer {
+        border-top: 1px solid #e2e8f0;
+        margin-top: 20px;
+        padding-top: 15px;
+        color: #64748b;
+        font-size: 14px;
+    }
+
+
+    .empty-box {
+        background: white;
+        border-radius: 22px;
+        padding: 60px 30px;
+        text-align: center;
+        box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+    }
+
+
+    .empty-icon {
+        font-size: 60px;
+        margin-bottom: 15px;
+    }
+
+
+    .empty-box h2 {
+        margin-bottom: 10px;
+    }
+
+
+    .empty-box p {
+        color: #64748b;
+    }
+
+
+    @@media (max-width: 700px) {
+
+        .applications-header {
+            padding: 30px;
+        }
+
+        .applications-header h1 {
+            font-size: 30px;
+        }
+
+        .applications-icon {
+            font-size: 45px;
+        }
+
+        .application-card {
+            flex-direction: column;
+        }
+
+        .application-top {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .application-details {
+            grid-template-columns: 1fr;
+        }
+
+    }
+
+</style>

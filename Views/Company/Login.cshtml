@@ -1,0 +1,70 @@
+@{
+    ViewData["Title"] = "Company Login";
+}
+
+<div class="login-page">
+
+    <div class="login-card">
+
+        <div class="login-icon">🏢</div>
+
+        <h1>Company Login</h1>
+
+        <p class="login-subtitle">
+            Login to your company placement account
+        </p>
+
+        @if (ViewBag.Error != null)
+        {
+            <p class="error-message">
+                @ViewBag.Error
+            </p>
+        }
+
+        <form method="post">
+
+            <div class="login-input-group">
+
+                <label>Email</label>
+
+                <input type="email"
+                       name="email"
+                       placeholder="Enter company email"
+                       required />
+
+            </div>
+
+            <div class="login-input-group">
+
+                <label>Password</label>
+
+                <input type="password"
+                       name="password"
+                       placeholder="Enter password"
+                       required />
+
+            </div>
+
+            <button type="submit"
+                    class="login-btn">
+                Login
+            </button>
+
+        </form>
+
+        <p class="register-text">
+            Don't have a company account?
+            <a href="/Company/Register">
+                Register
+            </a>
+        </p>
+
+        <p class="register-text">
+            <a href="/">
+                ← Back to Home
+            </a>
+        </p>
+
+    </div>
+
+</div>

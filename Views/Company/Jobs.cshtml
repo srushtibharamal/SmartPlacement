@@ -1,0 +1,235 @@
+@model IEnumerable<SmartPlacement.Models.Job>
+
+@{
+    ViewData["Title"] = "My Posted Jobs";
+}
+
+<div class="posted-jobs-page">
+
+    <div class="jobs-header">
+        <h1>📢 My Posted Jobs</h1>
+
+        <p>
+            View all job opportunities posted by your company.
+        </p>
+
+        <a href="/Company/PostJob" class="post-job-btn">
+            + Post New Job
+        </a>
+    </div>
+
+
+    @if (Model != null && Model.Any())
+    {
+        <div class="jobs-container">
+
+            @foreach (var job in Model)
+            {
+                <div class="job-card">
+
+                    <div class="job-top">
+
+                        <div class="company-icon">
+                            @job.CompanyName.Substring(0, 1).ToUpper()
+                        </div>
+
+                        <div>
+                            <h2>@job.JobTitle</h2>
+
+                            <p class="company-name">
+                                🏢 @job.CompanyName
+                            </p>
+                        </div>
+
+                    </div>
+
+
+                    <div class="job-info">
+
+                        <span>📍 @job.Location</span>
+
+                        <span>💼 @job.JobType</span>
+
+                        <span>💰 @job.Salary</span>
+
+                    </div>
+
+
+                    <div class="job-details">
+
+                        <p>
+                            <strong>Skills:</strong>
+                            @job.SkillsRequired
+                        </p>
+
+                        <p>
+                            <strong>Description:</strong>
+                            @job.Description
+                        </p>
+
+                        <p>
+                            <strong>Posted Date:</strong>
+                            @job.PostedDate
+                        </p>
+
+                    </div>
+
+
+                    <div class="job-status">
+                        🟢 Open
+                    </div>
+
+                </div>
+            }
+
+        </div>
+    }
+    else
+    {
+        <div class="empty-message">
+
+            <div class="empty-icon">📭</div>
+
+            <h2>No Jobs Posted Yet</h2>
+
+            <p>
+                Your company has not posted any jobs yet.
+            </p>
+
+            <a href="/Company/PostJob" class="post-job-btn">
+                + Post Your First Job
+            </a>
+
+        </div>
+    }
+
+
+    <br />
+
+    <a href="/Company/Dashboard"
+       class="back-btn">
+        ← Back to Company Dashboard
+    </a>
+
+</div>
+
+
+<style>
+
+    .posted-jobs-page {
+        max-width: 1000px;
+        margin: 40px auto;
+        padding: 20px;
+    }
+
+    .jobs-header {
+        text-align: center;
+        margin-bottom: 35px;
+    }
+
+    .jobs-header h1 {
+        font-size: 36px;
+        margin-bottom: 10px;
+    }
+
+    .jobs-header p {
+        font-size: 17px;
+        color: #666;
+        margin-bottom: 25px;
+    }
+
+    .post-job-btn {
+        display: inline-block;
+        padding: 12px 22px;
+        background: #0d6efd;
+        color: white;
+        text-decoration: none;
+        border-radius: 8px;
+        font-weight: 600;
+    }
+
+    .jobs-container {
+        display: grid;
+        gap: 22px;
+    }
+
+    .job-card {
+        background: white;
+        padding: 25px;
+        border-radius: 16px;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        position: relative;
+    }
+
+    .job-top {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .company-icon {
+        width: 55px;
+        height: 55px;
+        border-radius: 12px;
+        background: #eef3ff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 25px;
+        font-weight: bold;
+    }
+
+    .job-top h2 {
+        margin: 0 0 5px;
+    }
+
+    .company-name {
+        margin: 0;
+        color: #666;
+    }
+
+    .job-info {
+        display: flex;
+        gap: 20px;
+        flex-wrap: wrap;
+        margin: 20px 0;
+        padding: 15px 0;
+        border-top: 1px solid #eee;
+        border-bottom: 1px solid #eee;
+    }
+
+    .job-details p {
+        margin: 10px 0;
+        line-height: 1.5;
+    }
+
+    .job-status {
+        display: inline-block;
+        margin-top: 15px;
+        padding: 8px 15px;
+        border-radius: 20px;
+        background: #d4edda;
+        color: #155724;
+        font-weight: 600;
+    }
+
+    .empty-message {
+        background: white;
+        padding: 60px 30px;
+        border-radius: 16px;
+        text-align: center;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+    }
+
+    .empty-icon {
+        font-size: 50px;
+        margin-bottom: 15px;
+    }
+
+    .back-btn {
+        color: #0d6efd;
+        text-decoration: none;
+        font-weight: 600;
+    }
+
+</style>

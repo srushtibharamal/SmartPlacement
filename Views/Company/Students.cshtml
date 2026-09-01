@@ -1,0 +1,114 @@
+@model IEnumerable<SmartPlacement.Models.Student>
+
+@{
+    ViewData["Title"] = "Students";
+}
+
+<div class="dashboard">
+
+    <h1>👥 Students</h1>
+
+    <p>View students registered on SmartPlacement.</p>
+
+    @if (Model != null && Model.Any())
+    {
+        <div class="students-container">
+
+            @foreach (var student in Model)
+            {
+                <div class="student-card">
+
+                    <div class="student-icon">
+                        🎓
+                    </div>
+
+                    <div class="student-details">
+
+                        <h2>@student.FullName</h2>
+
+                        <p>
+                            <strong>Email:</strong>
+                            @student.Email
+                        </p>
+
+                        <p>
+                            <strong>Phone:</strong>
+                            @student.Phone
+                        </p>
+
+                        <p>
+                            <strong>Course:</strong>
+                            @student.Course
+                        </p>
+
+                        <p>
+                            <strong>College:</strong>
+                            @student.College
+                        </p>
+
+                    </div>
+
+                </div>
+            }
+
+        </div>
+    }
+    else
+    {
+        <div class="empty-message">
+            <h2>🎓 No Students Found</h2>
+
+            <p>
+                No students have registered yet.
+            </p>
+        </div>
+    }
+
+    <br />
+
+    <a href="/Company/Dashboard" class="edit-profile-btn">
+        ← Back to Company Dashboard
+    </a>
+
+</div>
+
+<style>
+
+    .students-container {
+        display: grid;
+        gap: 20px;
+        margin-top: 30px;
+    }
+
+    .student-card {
+        background: white;
+        padding: 25px;
+        border-radius: 15px;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        display: flex;
+        gap: 20px;
+        align-items: flex-start;
+    }
+
+    .student-icon {
+        font-size: 45px;
+    }
+
+    .student-details h2 {
+        margin: 0 0 15px;
+        color: #2456d3;
+    }
+
+    .student-details p {
+        margin: 8px 0;
+    }
+
+    .empty-message {
+        background: white;
+        padding: 40px;
+        margin-top: 30px;
+        border-radius: 15px;
+        text-align: center;
+    }
+
+</style>

@@ -1,0 +1,267 @@
+@{
+    ViewData["Title"] = "Student Dashboard";
+
+    int totalApplications = ViewBag.TotalApplications ?? 0;
+    int shortlistedApplications = ViewBag.ShortlistedApplications ?? 0;
+    int jobsAvailable = ViewBag.JobsAvailable ?? 0;
+    string profileComplete = ViewBag.ProfileComplete ?? "0%";
+}
+
+<div class="dashboard-page">
+
+    <!-- Welcome Header -->
+
+    <div class="dashboard-header">
+
+        <div>
+
+            <span class="dashboard-badge">
+                SMARTPLACEMENT
+            </span>
+
+            <h1>Welcome, Student! 🎓</h1>
+
+            <p>
+                Manage your placement journey, explore opportunities
+                and track your applications.
+            </p>
+
+        </div>
+
+        <div class="dashboard-header-right">
+
+            <div class="dashboard-header-icon">
+                🎓
+            </div>
+
+            <a href="/Student/Logout"
+               class="logout-btn">
+                Logout
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <!-- Statistics -->
+
+    <div class="dashboard-stats">
+
+        <div class="dashboard-stat-card">
+
+            <div class="stat-icon">
+                💼
+            </div>
+
+            <div>
+                <strong>@jobsAvailable</strong>
+                <span>Jobs Available</span>
+            </div>
+
+        </div>
+
+
+        <div class="dashboard-stat-card">
+
+            <div class="stat-icon">
+                📄
+            </div>
+
+            <div>
+                <strong>@totalApplications</strong>
+                <span>My Applications</span>
+            </div>
+
+        </div>
+
+
+        <div class="dashboard-stat-card">
+
+            <div class="stat-icon">
+                ⭐
+            </div>
+
+            <div>
+                <strong>@shortlistedApplications</strong>
+                <span>Shortlisted</span>
+            </div>
+
+        </div>
+
+
+        <div class="dashboard-stat-card">
+
+            <div class="stat-icon">
+                👤
+            </div>
+
+            <div>
+                <strong>@profileComplete</strong>
+                <span>Profile Complete</span>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- Quick Actions -->
+
+    <div class="dashboard-section">
+
+        <div class="dashboard-section-title">
+
+            <h2>Quick Actions</h2>
+
+            <p>
+                Everything you need for your placement journey.
+            </p>
+
+        </div>
+
+
+        <div class="dashboard-cards">
+
+
+            <a href="/Student/Jobs"
+               class="dashboard-card">
+
+                <div class="dashboard-card-icon">
+                    🔍
+                </div>
+
+                <div>
+
+                    <h2>Find Jobs</h2>
+
+                    <p>
+                        Explore available placement and internship
+                        opportunities.
+                    </p>
+
+                </div>
+
+                <span class="dashboard-arrow">
+                    →
+                </span>
+
+            </a>
+
+
+            <a href="/Student/Applications"
+               class="dashboard-card">
+
+                <div class="dashboard-card-icon">
+                    📄
+                </div>
+
+                <div>
+
+                    <h2>My Applications</h2>
+
+                    <p>
+                        Track your submitted applications and
+                        application status.
+                    </p>
+
+                </div>
+
+                <span class="dashboard-arrow">
+                    →
+                </span>
+
+            </a>
+
+
+            <a href="/Student/Profile"
+               class="dashboard-card">
+
+                <div class="dashboard-card-icon">
+                    👤
+                </div>
+
+                <div>
+
+                    <h2>My Profile</h2>
+
+                    <p>
+                        View and update your student profile
+                        information.
+                    </p>
+
+                </div>
+
+                <span class="dashboard-arrow">
+                    →
+                </span>
+
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <!-- Placement Tip -->
+
+    <div class="dashboard-tip">
+
+        <div class="tip-icon">
+            💡
+        </div>
+
+        <div>
+
+            <h3>Placement Tip</h3>
+
+            <p>
+                Keep your profile updated and apply to opportunities
+                that match your skills and career goals.
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<style>
+
+    .dashboard-header-right {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 18px;
+    }
+
+    .logout-btn {
+        display: inline-block;
+        padding: 11px 24px;
+        background: white;
+        color: #1d4ed8;
+        text-decoration: none;
+        border-radius: 10px;
+        font-weight: 700;
+        transition: 0.2s;
+    }
+
+    .logout-btn:hover {
+        background: #eff6ff;
+        transform: translateY(-2px);
+    }
+
+    @@media (max-width: 700px) {
+
+        .dashboard-header {
+            text-align: center;
+        }
+
+        .dashboard-header-right {
+            margin-top: 20px;
+        }
+
+    }
+
+</style>

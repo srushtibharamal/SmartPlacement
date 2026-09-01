@@ -1,0 +1,145 @@
+@{
+    ViewData["Title"] = "Job Details";
+
+    int jobId = ViewBag.JobId ?? 1;
+    string jobTitle = ViewBag.JobTitle ?? "Software Developer";
+    string companyName = ViewBag.CompanyName ?? "TCS";
+    string location = ViewBag.Location ?? "Pune";
+    string packageAmount = ViewBag.Package ?? "₹6 LPA";
+}
+
+<div class="job-details-page">
+
+    <div class="job-details-card">
+
+        <div class="job-details-top">
+
+            <div class="details-company-icon">
+                @companyName.Substring(0, 1)
+            </div>
+
+            <div>
+
+                <span class="details-badge">
+                    FULL TIME
+                </span>
+
+                <h1>@jobTitle</h1>
+
+                <p class="details-company">
+                    @companyName
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="details-info-grid">
+
+            <div class="details-info-item">
+                <span>📍</span>
+
+                <div>
+                    <small>Location</small>
+                    <strong>@location</strong>
+                </div>
+            </div>
+
+
+            <div class="details-info-item">
+                <span>💰</span>
+
+                <div>
+                    <small>Package</small>
+                    <strong>@packageAmount</strong>
+                </div>
+            </div>
+
+
+            <div class="details-info-item">
+                <span>💼</span>
+
+                <div>
+                    <small>Job Type</small>
+                    <strong>Full Time</strong>
+                </div>
+            </div>
+
+
+            <div class="details-info-item">
+                <span>🟢</span>
+
+                <div>
+                    <small>Status</small>
+                    <strong>Open</strong>
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="details-section">
+
+            <h2>About the Role</h2>
+
+            <p>
+                We are looking for a motivated professional to join
+                @companyName and work on real-world software projects.
+                The selected candidate will collaborate with experienced
+                developers and contribute to technology solutions.
+            </p>
+
+        </div>
+
+
+        <div class="details-section">
+
+            <h2>Responsibilities</h2>
+
+            <ul>
+                <li>Develop and maintain software applications.</li>
+                <li>Write clean and efficient code.</li>
+                <li>Work with team members on development projects.</li>
+                <li>Test and debug applications.</li>
+                <li>Participate in project discussions and reviews.</li>
+            </ul>
+
+        </div>
+
+
+        <div class="details-section">
+
+            <h2>Required Skills</h2>
+
+            <div class="skills-list">
+
+                <span>C#</span>
+                <span>ASP.NET Core</span>
+                <span>SQL</span>
+                <span>HTML</span>
+                <span>CSS</span>
+                <span>JavaScript</span>
+
+            </div>
+
+        </div>
+
+
+        <div class="details-footer">
+
+            <a href="/Student/Jobs"
+               class="back-btn">
+                ← Back to Jobs
+            </a>
+
+            <a href="/Student/Apply?jobId=@jobId"
+               class="details-apply-btn">
+                Apply for this Job →
+            </a>
+
+        </div>
+
+    </div>
+
+</div>

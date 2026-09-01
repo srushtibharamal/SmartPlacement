@@ -1,0 +1,122 @@
+@{
+    ViewData["Title"] = "Student Registration";
+}
+
+<div class="login-page">
+
+    <div class="login-card">
+
+        <div class="login-icon">📝</div>
+
+        <h1>Create Account</h1>
+
+        <p class="login-subtitle">
+            Register for your SmartPlacement account
+        </p>
+
+
+        @if (ViewBag.Error != null)
+        {
+            <p class="error-message">
+                @ViewBag.Error
+            </p>
+        }
+
+
+        <form method="post"
+              action="/Student/Register">
+
+            <div class="login-input-group">
+
+                <label>Full Name</label>
+
+                <input type="text"
+                       name="fullName"
+                       placeholder="Enter your full name"
+                       required />
+
+            </div>
+
+
+            <div class="login-input-group">
+
+                <label>Email</label>
+
+                <input type="email"
+                       name="email"
+                       placeholder="Enter your email"
+                       required />
+
+            </div>
+
+
+            <div class="login-input-group">
+
+                <label>Phone Number</label>
+
+                <input type="tel"
+                       name="phone"
+                       placeholder="Enter 10-digit phone number"
+                       maxlength="10"
+                       required />
+
+            </div>
+
+
+            <div class="login-input-group">
+
+                <label>Course</label>
+
+                <input type="text"
+                       name="course"
+                       placeholder="Enter your course"
+                       required />
+
+            </div>
+
+
+            <div class="login-input-group">
+
+                <label>College</label>
+
+                <input type="text"
+                       name="college"
+                       placeholder="Enter your college"
+                       required />
+
+            </div>
+
+
+            <div class="login-input-group">
+
+                <label>Password</label>
+
+                <input type="password"
+                       name="password"
+                       placeholder="Create a password"
+                       required />
+
+            </div>
+
+
+            <button type="submit"
+                    class="login-btn">
+                Create Account
+            </button>
+
+        </form>
+
+
+        <p class="register-text">
+
+            Already have an account?
+
+            <a href="/Student/Login">
+                Login
+            </a>
+
+        </p>
+
+    </div>
+
+</div>
